@@ -1,7 +1,7 @@
 title:
 toc: true
 ---
-<p align="center" style="border-radius: 50%;"><img src="/nblogs/img/avatar.png" alt="blacklisten" height=200 width=200></p>
+<p align="center" style="border-radius: 50%;"><img src="/img/avatar.png" alt="blacklisten" height=200 width=200></p>
 <!-- <p align="center">
   <a href="https://github.com/SigureMo" class="zi zi_tmGithub"></a>
   <a href="mailto:sigure_mo@163.com" class="zi zi_envelope"></a> 
