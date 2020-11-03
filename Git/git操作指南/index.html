@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Git操作指南 - Blacklisten&#039;blogs</title><meta description="整理的一些Git常用命令，以及进阶命令git rebase，从这里你可以学到基础的Git配置命令、分支管理、fetch指令、git撤销、状态查询、文档查询、文件暂存、差异比较、基本操作、git进阶之rebase"><meta property="og:type" content="blog"><meta property="og:title" content="Git操作指南"><meta property="og:url" content="https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><meta property="og:site_name" content="Blacklisten&#039;blogs"><meta property="og:description" content="整理的一些Git常用命令，以及进阶命令git rebase，从这里你可以学到基础的Git配置命令、分支管理、fetch指令、git撤销、状态查询、文档查询、文件暂存、差异比较、基本操作、git进阶之rebase"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.blacklisten.cn/gallery/covers/eezy_69.svg"><meta property="article:published_time" content="2020-09-22T00:00:00.000Z"><meta property="article:author" content="blacklisten"><meta property="article:tag" content="Git操作指南"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/gallery/covers/eezy_69.svg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"},"headline":"Blacklisten'blogs","image":[],"datePublished":"2020-09-22T00:00:00.000Z","author":{"@type":"Person","name":"blacklisten"},"description":"整理的一些Git常用命令，以及进阶命令git rebase，从这里你可以学到基础的Git配置命令、分支管理、fetch指令、git撤销、状态查询、文档查询、文件暂存、差异比较、基本操作、git进阶之rebase"}</script><link rel="canonical" href="https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/github.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?68ab0f2c8b23735e70a585f85d89b4d3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-117852294-3" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-117852294-3');</script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Blacklisten'blogs" type="application/atom+xml">
+</head><body class="is-3-column"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script type="text/javascript" src="/js/snow.js"></script><div class="snow-container"></div><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Blacklisten</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="My Github" href="https://github.com/blacklisten"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/gallery/covers/eezy_69.svg" alt="Git操作指南"></span></div><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-09-22T00:00:00.000Z" title="2020-09-22T00:00:00.000Z">2020-09-22</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/Git/">Git</a></span><span class="level-item">14 分钟读完 (大约2063个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Git操作指南</h1><div class="content"><p>整理的一些<code>Git</code>常用命令，以及进阶命令<code>git rebase</code>，从这里你可以学到基础的<code>Git</code>配置命令、分支管理、<code>fetch</code>指令、<code>git</code>撤销、状态查询、文档查询、文件暂存、差异比较、基本操作、<code>git</code>进阶之<code>rebase</code></p>
+<a id="more"></a>
+
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><p>列出当前配置</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>列出<code>Repository</code>配置</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="built_in">local</span> --list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>列出全局配置</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>列出系统配置</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --system --list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>配置用户名</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"your name"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>配置用户邮箱</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">"youremail@github.com"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>查看本地分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看远程分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看本地和远程分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从当前分支切换到其它分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>创建并切换到新分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>删除分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>当前分支与指定分支合并</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看哪些分支已经/没有合并到当前分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --merged</span><br><span class="line">git branch --no-merged</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看各个分支最后一个提交对应的信息</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -v</span><br></pre></td></tr></tbody></table></figure>
+
+<p>删除远程分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin -d &lt;branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>重命名分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m &lt;oldbranch-name&gt; &lt;newbranch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>拉取远程分支并创建本地分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 本地分支名 origin/远程分支名</span><br><span class="line">or</span><br><span class="line">git fetch origin &lt;branch-name&gt;:&lt;local-branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="fetch指令"><a href="#fetch指令" class="headerlink" title="fetch指令"></a>fetch指令</h2><p>将远程仓库的内容更新到本地</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin &lt;branch-name&gt;:&lt;local-branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>一般而言，这个origin是远程主机名，一般默认就是origin。</li>
+<li><code>branch-name</code> 你要拉取的分支</li>
+<li><code>local-branch-name</code> 通常而言，就是你本地新建一个新分支，将origin下的某个分支代码下载到本地分支。</li>
+</ul>
+<p>将某个远程主机的更新，全部取回本地</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;远程主机名&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>取回特定分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;远程主机名&gt; &lt;分支名&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>将某个分支的内容取回到本地的某个分支</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin :&lt;local-branch-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>  <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38305012">git pull 和 git fetch的区别？</a></p>
+<h2 id="git撤销"><a href="#git撤销" class="headerlink" title="git撤销"></a>git撤销</h2><p>撤销工作区修改</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout--</span><br></pre></td></tr></tbody></table></figure>
+
+<p>暂存区文件撤销(不覆盖工作区)</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></tbody></table></figure>
+
+<p>版本回退</p>
+<p>  git reset –(soft|mixed|hard) &lt;HEAD~(num)&gt; |</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–hard</td>
+<td>回退全部，包括HEAD，index，working，tree</td>
+</tr>
+<tr>
+<td>–mixed</td>
+<td>回退部分，包括HEAD，index</td>
+</tr>
+<tr>
+<td>–soft</td>
+<td>只回退HEAD</td>
+</tr>
+</tbody></table>
+<h2 id="状态查询"><a href="#状态查询" class="headerlink" title="状态查询"></a>状态查询</h2><p>查看状态</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看历史操作记录</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看日志</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="文档查询"><a href="#文档查询" class="headerlink" title="文档查询"></a>文档查询</h2><p>展示Git命令大纲</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span> (--<span class="built_in">help</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>展示Git命令大纲全部列表</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span> -a</span><br></pre></td></tr></tbody></table></figure>
+
+<p>展示具体命令说明手册</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="文件暂存"><a href="#文件暂存" class="headerlink" title="文件暂存"></a>文件暂存</h2><p>添加改动到stash</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash sava -a <span class="string">"message"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>删除暂存</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop stash@{ID}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看stash列表</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>删除全部缓存</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash clear</span><br></pre></td></tr></tbody></table></figure>
+
+<p>恢复改动</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop stash@{ID}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="差异比较"><a href="#差异比较" class="headerlink" title="差异比较"></a>差异比较</h2><p>比较工作区与缓存区</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></tbody></table></figure>
+
+<p>比较缓存区与本地库最近一次commit内容</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></tbody></table></figure>
+
+<p>比较工作区与本地最近一次commit内容</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></tbody></table></figure>
+
+<p>比较两个commit之间的差异</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>创建本地仓库</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></tbody></table></figure>
+
+<p>链接本地仓库与远程仓库</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin</span><br><span class="line">origin默认是远端仓库别名url 可以使用https或者ssh的方式</span><br></pre></td></tr></tbody></table></figure>
+
+<p>检查配置信息</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Git user name and email</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"yourname"</span></span><br><span class="line">git config --global user.email <span class="string">"youremail"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>生成SSH秘钥</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"youremail"</span></span><br><span class="line"><span class="built_in">cd</span> ~/.ssh 里面有一个文件名为id_rsa.pub, 把里面的内容复制到git库的我的SSHKEYS中</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看远端仓库信息</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></tbody></table></figure>
+
+<p>远端仓库重新命名</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename old new</span><br></pre></td></tr></tbody></table></figure>
+
+<p>提交到缓存区</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add . 全部文件</span><br><span class="line">git add 指定文件</span><br></pre></td></tr></tbody></table></figure>
+
+<p>提交到本地仓库</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"message"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>提交到远程仓库</p>
+  <figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="git-进阶之rebase"><a href="#git-进阶之rebase" class="headerlink" title="git 进阶之rebase"></a>git 进阶之rebase</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61283395">Git commits历史是如何做到如此清爽的？</a></p>
+<h3 id="Rebase场景一：如何合并多次提交记录"><a href="#Rebase场景一：如何合并多次提交记录" class="headerlink" title="Rebase场景一：如何合并多次提交记录"></a>Rebase场景一：如何合并多次提交记录</h3><ol>
+<li><p>合并最近的n次提交记录</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~n</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>进入vi编辑模式</p>
+<p>pick：保留该commit（缩写:p）</p>
+<p>reword：保留该commit，但我需要修改该commit的注释（缩写:r）</p>
+<p>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）</p>
+<p>squash：将该commit和前一个commit合并（缩写:s）</p>
+<p>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）</p>
+<p>exec：执行shell命令（缩写:x）</p>
+<p>drop：我要丢弃该commit（缩写:d）</p>
+</li>
+<li><p>如果保存的时候，出错</p>
+<figure class="highlight javascript"><figcaption><span>JavaScript</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: cannot <span class="string">'squash'</span> without a previous commit</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意不要合并先前提交的东西，也就是已经提交远程分支的纪录。</strong></p>
+</li>
+<li><p>如果你异常退出了 <code>vi</code> 窗口</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --edit-todo</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这时候会一直处在这个编辑的模式里，我们可以回去继续编辑，修改完保存一下</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>查看结果</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h3 id="Rebase场景二：分支合并"><a href="#Rebase场景二：分支合并" class="headerlink" title="Rebase场景二：分支合并"></a>Rebase场景二：分支合并</h3><ol>
+<li><p>我们先从 <code>master</code> 分支切出一个 <code>dev</code> 分支，进行开发：</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>这时候，你的同事完成了一次 <code>hotfix</code>，并合并入了 <code>master</code> 分支，此时 <code>master</code> 已经领先于你的 <code>feature</code> 分支了</p>
+</li>
+<li><p>恰巧，我们想要同步 <code>master</code> 分支的改动，首先想到了 <code>merge</code></p>
+</li>
+<li><p>让我们来试试 <code>git rebase</code>而不是使用merge</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase master</span><br></pre></td></tr></tbody></table></figure>
+
+<p>首先，<code>git</code> 会把 <code>feature</code> 分支里面的每个 <code>commit</code> 取消掉；<br>其次，把上面的操作临时保存成 <code>patch</code> 文件，存在 <code>.git/rebase</code> 目录下；<br>然后，把 <code>feature</code> 分支更新到最新的 <code>master</code> 分支；<br>最后，把上面保存的 <code>patch</code> 文件应用到 <code>feature</code> 分支上；</p>
+<p>从 <code>commit</code> 记录我们可以看出来，<code>feature</code> 分支是基于 <code>hotfix</code> 合并后的 <code>master</code> ，自然而然的成为了最领先的分支，而且没有 <code>merge</code> 的 <code>commit</code> 记录，是不是感觉很舒服了。</p>
+</li>
+<li><p>在 <code>rebase</code> 的过程中，也许会出现冲突 <code>conflict</code>。在这种情况，<code>git</code> 会停止 <code>rebase</code> 并会让你去解决冲突。在解决完冲突后，用 <code>git add</code> 命令去更新这些内容</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这样 <code>git</code> 会继续应用余下的 <code>patch</code> 补丁文件。</p>
+</li>
+<li><p>在任何时候，我们都可以用 <code>--abort</code> 参数来终止 <code>rebase</code> 的行动，并且分支会回到 <code>rebase</code> 开始前的状态。</p>
+<figure class="highlight bash"><figcaption><span>Git Bash/Shell</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase —abort</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/6869519303864123399">https://juejin.im/post/6869519303864123399</a></p>
+<p><a target="_blank" rel="noopener" href="http://jartto.wang/2018/12/11/git-rebase/">http://jartto.wang/2018/12/11/git-rebase/</a></p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/">https://git-scm.com/book/zh/v2/</a></p>
+<article class="message message-immersive is-warning">
+<div class="message-body">
+<i class="fas fa-question-circle mr-2"></i>Something wrong with this article? 
+Click <a target="_blank" rel="noopener" href="https://github.com/blacklisten/nblogs/edit/site/source/_posts/2020/Git-Operating-Guide.md">here</a> 
+to submit your revision.
+</div>
+</article>
+
+<p><a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-size:12px;line-height:1.2;display:inline-block;border-radius:3px" href="https://www.vecteezy.com/free-vector/vector-landscape" target="_blank" rel="noopener noreferrer" title="Vector Landscape Vectors by Vecteezy"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white" viewBox="0 0 32 32"><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Vector Landscape Vectors by Vecteezy</span></a></p>
+<script>
+        document.querySelectorAll('.not-gallery-item')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="article-licensing box"><div class="licensing-title"><p>Git操作指南</p><p><a href="https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/">https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>blacklisten</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-09-22</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p></div></div></div></div></div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/">Git操作指南</a></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.jpg" alt="支付宝"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Hexo/icarus%E6%8C%87%E5%8D%97/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Icarus指南</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Front/json-stringify/"><span class="level-item">JSON.stringify()</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqus.js"></script><script>new DisqusJS({
+            shortname: 'blacklisten',
+            apikey: "exTu1A9AwH0nVWvvCmSVh7H8HoTp4RUkld2NgMecCw2aYahA3g7iDtzNCxP7Quug",
+            siteName: "Blacklisten'blogs",
+            identifier: 'Git/git操作指南/',
+            url: 'https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/',
+            title: "Git操作指南",
+            api: 'https://disqus.skk.moe/disqus/',
+            admin: "blacklisten",
+            adminLabel: "Admin",
+            nesting: 4
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><a class="media-left" href="/Front/react%E5%9F%BA%E7%A1%80/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-5w1eq3.jpg" alt="React基础"></p></a><div class="media-content size-small"><p><time dateTime="2020-11-03T15:15:06.000Z">2020-11-03</time></p><p class="title is-6"><a class="link-muted" href="/Front/react%E5%9F%BA%E7%A1%80/">React基础</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Front/math-basic-api/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-2em38y.jpg" alt="Math basic api"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-27T16:15:06.000Z">2020-10-27</time></p><p class="title is-6"><a class="link-muted" href="/Front/math-basic-api/">Math basic api</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-963wjw.jpg" alt="什么是Source Map"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-22T16:15:06.000Z">2020-10-22</time></p><p class="title is-6"><a class="link-muted" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/">什么是Source Map</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Configuration/">Configuration</a></p></div></article><article class="media"><a class="media-left" href="/Front/abortcontroller%F0%9F%91%80/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-xlq1rv.jpg" alt="AbortController👀"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-22T15:15:06.000Z">2020-10-22</time></p><p class="title is-6"><a class="link-muted" href="/Front/abortcontroller%F0%9F%91%80/">AbortController👀</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-xlx96v.png" alt="什么是热更新？"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-20T16:15:06.000Z">2020-10-20</time></p><p class="title is-6"><a class="link-muted" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/">什么是热更新？</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Configuration/">Configuration</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Configuration/"><span class="level-start"><span class="level-item">Configuration</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Css/"><span class="level-start"><span class="level-item">Css</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/FAQ/"><span class="level-start"><span class="level-item">FAQ</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Front/"><span class="level-start"><span class="level-item">Front</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Git/"><span class="level-start"><span class="level-item">Git</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Hexo/"><span class="level-start"><span class="level-item">Hexo</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Learning/"><span class="level-start"><span class="level-item">Learning</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Browser/"><span class="tag">Browser</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Chocolatey/"><span class="tag">Chocolatey</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Electron/"><span class="tag">Electron</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span class="tag">Git操作指南</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo-Theme/"><span class="tag">Hexo-Theme</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Icarus%E6%8C%87%E5%8D%97/"><span class="tag">Icarus指南</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Math/"><span class="tag">Math</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Network-Request/"><span class="tag">Network Request</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NodeJs/"><span class="tag">NodeJs</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Webpack/"><span class="tag">Webpack</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/commitizen/"><span class="tag">commitizen</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/layout/"><span class="tag">layout</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nrm/"><span class="tag">nrm</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nvm/"><span class="tag">nvm</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/terminal/"><span class="tag">terminal</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vscode/"><span class="tag">vscode</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#配置命令"><span class="mr-2">1</span><span>配置命令</span></a></li><li><a class="is-flex" href="#分支管理"><span class="mr-2">2</span><span>分支管理</span></a></li><li><a class="is-flex" href="#fetch指令"><span class="mr-2">3</span><span>fetch指令</span></a></li><li><a class="is-flex" href="#git撤销"><span class="mr-2">4</span><span>git撤销</span></a></li><li><a class="is-flex" href="#状态查询"><span class="mr-2">5</span><span>状态查询</span></a></li><li><a class="is-flex" href="#文档查询"><span class="mr-2">6</span><span>文档查询</span></a></li><li><a class="is-flex" href="#文件暂存"><span class="mr-2">7</span><span>文件暂存</span></a></li><li><a class="is-flex" href="#差异比较"><span class="mr-2">8</span><span>差异比较</span></a></li><li><a class="is-flex" href="#基本操作"><span class="mr-2">9</span><span>基本操作</span></a></li><li><a class="is-flex" href="#git-进阶之rebase"><span class="mr-2">10</span><span>git 进阶之rebase</span></a><ul class="menu-list"><li><a class="is-flex" href="#Rebase场景一：如何合并多次提交记录"><span class="mr-2">10.1</span><span>Rebase场景一：如何合并多次提交记录</span></a></li><li><a class="is-flex" href="#Rebase场景二：分支合并"><span class="mr-2">10.2</span><span>Rebase场景二：分支合并</span></a></li></ul></li><li><a class="is-flex" href="#参考"><span class="mr-2">11</span><span>参考</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Blacklisten</a><p class="size-small"><span>&copy; 2020 blacklisten</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/blacklisten"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><!-- hexo injector body_end start -->
+    <script>
+    (() => {
+        function switchTab() {
+            if (!location.hash) {
+              return;
+            }
+            Array
+                .from(document.querySelectorAll('.tab-content'))
+                .forEach($tab => {
+                    $tab.classList.add('is-hidden');
+                });
+            Array
+                .from(document.querySelectorAll('.tabs li'))
+                .forEach($tab => {
+                    $tab.classList.remove('is-active');
+                });
+            const $activeTab = document.querySelector(location.hash);
+            if ($activeTab) {
+                $activeTab.classList.remove('is-hidden');
+            }
+            const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+            if ($tabMenu) {
+                $tabMenu.parentElement.classList.add('is-active');
+            }
+        }
+        switchTab();
+        window.addEventListener('hashchange', switchTab, false);
+    })();
+    </script>
+    <!-- hexo injector body_end end --></body></html>

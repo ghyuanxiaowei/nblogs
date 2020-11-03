@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blacklisten&#39;blogs</title>
+  
+  
+  <link href="https://www.blacklisten.cn/atom.xml" rel="self"/>
+  
+  <link href="https://www.blacklisten.cn/"/>
+  <updated>2020-11-03T15:15:06.000Z</updated>
+  <id>https://www.blacklisten.cn/</id>
+  
+  <author>
+    <name>blacklisten</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React基础</title>
+    <link href="https://www.blacklisten.cn/Front/react%E5%9F%BA%E7%A1%80/"/>
+    <id>https://www.blacklisten.cn/Front/react%E5%9F%BA%E7%A1%80/</id>
+    <published>2020-11-03T15:15:06.000Z</published>
+    <updated>2020-11-03T15:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;基于&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://zh-hans.reactjs.org/docs/create-a-new-react-app.html#create-react-app&quot;&gt;create-react-app&lt;/a&gt;进行React学习，React个人感觉与Vue最大的区别在于高复用性，每一个组件都只做一件事，组件的业务逻辑可以放在父级去做(状态提升)。这与Vue2.0相差甚大，不过随着Vue3.0的到来，Vue也完全可以采取这种方式。弊端是React采用jsx、tsx进行DOM书写，需要额外学习一下语法糖，不过都是小问题🙁&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Front" scheme="https://www.blacklisten.cn/categories/Front/"/>
+    
+    
+    <category term="JavaScript" scheme="https://www.blacklisten.cn/tags/JavaScript/"/>
+    
+    <category term="React" scheme="https://www.blacklisten.cn/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Math basic api</title>
+    <link href="https://www.blacklisten.cn/Front/math-basic-api/"/>
+    <id>https://www.blacklisten.cn/Front/math-basic-api/</id>
+    <published>2020-10-27T16:15:06.000Z</published>
+    <updated>2020-10-27T16:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;Math&lt;/strong&gt; 是一个内置对象，它拥有一些数学常数属性和数学函数方法。&lt;strong&gt;Math&lt;/strong&gt; 不是一个函数对象。&lt;strong&gt;Math&lt;/strong&gt; 用于 &lt;strong&gt;Number&lt;/strong&gt; 类型。它不支持 &lt;strong&gt;BigInt&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;与其他全局对象不同的是，Math 不是一个构造器。Math 的所有属性与方法都是静态的。引用圆周率的写法是 Math.PI，调用正余弦函数的写法是 Math.sin(x)，x 是要传入的参数。Math 的常量是使用 JavaScript 中的全精度浮点数来定义的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Front" scheme="https://www.blacklisten.cn/categories/Front/"/>
+    
+    
+    <category term="JavaScript" scheme="https://www.blacklisten.cn/tags/JavaScript/"/>
+    
+    <category term="Math" scheme="https://www.blacklisten.cn/tags/Math/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是Source Map</title>
+    <link href="https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"/>
+    <id>https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/</id>
+    <published>2020-10-22T16:15:06.000Z</published>
+    <updated>2020-10-22T16:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在日常开发过程中，我们编写的源代码通过多重处理（编译，封装，压缩…），最后形成的产物代码，在浏览器中调试时，我们会发现代码变得面目全非，根本没办法调试。&lt;br&gt;因此，我们需要一种将产物代码回溯到源代码的功能，&lt;strong&gt;Source Map&lt;/strong&gt;就是实现这一功能的工具。&lt;br&gt;&lt;strong&gt;Source Map&lt;/strong&gt;的基本原理是，在编译过程中，在生成产物代码的同时也生成基于源代码的一份映射关系表。有了这张映射关系表，我们就可以通过 chrome 控制台中的“Enable JavaScript source map”来实现调试时的显示与定位源代码的功能。&lt;br&gt;生成&lt;strong&gt;Source Map&lt;/strong&gt;的方式有很多种，他们的&lt;strong&gt;构建速度、质量&lt;/strong&gt;（反解代码与源代码的接近程度以及调试时行号等辅助信息的对应情况）、&lt;strong&gt;访问方式&lt;/strong&gt;（在产物文件中或单独生成 source map）、文件大小都各不相同。在开发和生成环境下我们对 source map 的期望也有所不同。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在开发环境中，我们更关心构建速度、质量，以便于提升开发效率，而不关心文件大小与访问方式&lt;/li&gt;
+&lt;li&gt;在生产环境中，我们更关注的是，是否需要开启 source map，生成文件的大小和访问方式是否对页面性能造成影响，其次才是质量和构建速度。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="Webpack" scheme="https://www.blacklisten.cn/tags/Webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AbortController👀</title>
+    <link href="https://www.blacklisten.cn/Front/abortcontroller%F0%9F%91%80/"/>
+    <id>https://www.blacklisten.cn/Front/abortcontroller%F0%9F%91%80/</id>
+    <published>2020-10-22T15:15:06.000Z</published>
+    <updated>2020-10-22T15:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;code&gt;AbortController&lt;/code&gt;接口表示一个控制器对象，允许你根据需要中止一个或多个 Web请求。你可以使用 &lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/API/AbortController/AbortController&quot;&gt;AbortController.AbortController()&lt;/a&gt; 构造函数创建一个新的 &lt;code&gt;AbortController&lt;/code&gt; 。使用&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/API/AbortSignal&quot;&gt;AbortSignal&lt;/a&gt; 对象可以完成与与DOM请求的通信。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Front" scheme="https://www.blacklisten.cn/categories/Front/"/>
+    
+    
+    <category term="JavaScript" scheme="https://www.blacklisten.cn/tags/JavaScript/"/>
+    
+    <category term="Network Request" scheme="https://www.blacklisten.cn/tags/Network-Request/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是热更新？</title>
+    <link href="https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/"/>
+    <id>https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/</id>
+    <published>2020-10-20T16:15:06.000Z</published>
+    <updated>2020-10-20T16:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;看到浏览器热更新，我们很容易就想到的是&lt;code&gt;webpack&lt;/code&gt; 和 &lt;code&gt;webpack-dev-server&lt;/code&gt;。&lt;br&gt;问题：热更新是保存后自动编译（Auto Compile）吗？还是自动刷新浏览器（Live Reload）？还是指HMR（Hot Module Replacement，模块热替换）？&lt;br&gt;先看一下什么是浏览器的热更新。浏览器的热更新，指的是我们在本地开发的同时打开浏览器进行预览，当代码发生变化时，浏览器自动更新页面的技术。&lt;strong&gt;这里的自动更新，表现上又分为自动刷新整个页面，以及页面整体无刷新而只更新页面的部分内容。&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="Webpack" scheme="https://www.blacklisten.cn/tags/Webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SameSite cookies报错</title>
+    <link href="https://www.blacklisten.cn/FAQ/samesite-cookies%E6%8A%A5%E9%94%99/"/>
+    <id>https://www.blacklisten.cn/FAQ/samesite-cookies%E6%8A%A5%E9%94%99/</id>
+    <published>2020-10-17T00:00:00.000Z</published>
+    <updated>2020-10-17T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;error message：Because a cookie’s SameSite attribute was not set or is invalid, it defaults to SameSite=Lax, which prevents the cookie from being set in a cross-site context. This behavior protects user data from accidentally leaking to third parties and cross-site request forgery.&lt;/p&gt;
+&lt;p&gt;Resolve this issue by updating the attributes of the cookie:&lt;br&gt;Specify SameSite=None and Secure if the cookie is intended to be set in cross-site contexts. Note that only cookies sent over HTTPS may use the Secure attribute.&lt;br&gt;Specify SameSite=Strict or SameSite=Lax if the cookie should not be set by cross-site requests&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="FAQ" scheme="https://www.blacklisten.cn/categories/FAQ/"/>
+    
+    
+    <category term="Browser" scheme="https://www.blacklisten.cn/tags/Browser/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>commitizen规范commit</title>
+    <link href="https://www.blacklisten.cn/Git/commitizen%E8%A7%84%E8%8C%83commit/"/>
+    <id>https://www.blacklisten.cn/Git/commitizen%E8%A7%84%E8%8C%83commit/</id>
+    <published>2020-09-24T00:00:00.000Z</published>
+    <updated>2020-09-24T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在多人协作的项目中，如果&lt;code&gt;Git&lt;/code&gt;提交说明过于混乱，是不利于代码&lt;strong&gt;review&lt;/strong&gt;的。如果&lt;code&gt;Git&lt;/code&gt;提交说明足够精准、详细，不仅有利于代码的&lt;strong&gt;review&lt;/strong&gt;也有利于后期排查问题，甚至我们可以根据&lt;code&gt;commit&lt;/code&gt;信息生成响应日志。&lt;br&gt;本文主要介绍通过&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/commitizen/cz-cli&quot;&gt;cz&lt;/a&gt;工具，以及附和&lt;code&gt;Angular&lt;/code&gt;规范的提交说明来规范&lt;code&gt;commit&lt;/code&gt;信息。也可以查看&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/vuejs/vue&quot;&gt;vuejs&lt;/a&gt;，他的提交说明就是根据&lt;code&gt;Angular&lt;/code&gt;规范来的。&lt;br&gt;本文示例: &lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/blacklisten/cz-example&quot;&gt;cz-example&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Git" scheme="https://www.blacklisten.cn/categories/Git/"/>
+    
+    
+    <category term="commitizen" scheme="https://www.blacklisten.cn/tags/commitizen/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Icarus指南</title>
+    <link href="https://www.blacklisten.cn/Hexo/icarus%E6%8C%87%E5%8D%97/"/>
+    <id>https://www.blacklisten.cn/Hexo/icarus%E6%8C%87%E5%8D%97/</id>
+    <published>2020-09-22T00:00:00.000Z</published>
+    <updated>2020-09-22T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Icarus的默认主题配置文件为&lt;code&gt;_config.icarus.yml&lt;/code&gt;。&lt;br&gt;此文件定义了站点全局的布局与样式设置，同时也控制了例如插件与挂件等外部功能的配置。&lt;br&gt;本文详细介绍了主题的一般配置，并且解释了Icarus使用哪些配置文件和它是如何生成并验证这些配置。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://www.blacklisten.cn/categories/Hexo/"/>
+    
+    
+    <category term="Hexo-Theme" scheme="https://www.blacklisten.cn/tags/Hexo-Theme/"/>
+    
+    <category term="Icarus指南" scheme="https://www.blacklisten.cn/tags/Icarus%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git操作指南</title>
+    <link href="https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"/>
+    <id>https://www.blacklisten.cn/Git/git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</id>
+    <published>2020-09-22T00:00:00.000Z</published>
+    <updated>2020-09-22T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;整理的一些&lt;code&gt;Git&lt;/code&gt;常用命令，以及进阶命令&lt;code&gt;git rebase&lt;/code&gt;，从这里你可以学到基础的&lt;code&gt;Git&lt;/code&gt;配置命令、分支管理、&lt;code&gt;fetch&lt;/code&gt;指令、&lt;code&gt;git&lt;/code&gt;撤销、状态查询、文档查询、文件暂存、差异比较、基本操作、&lt;code&gt;git&lt;/code&gt;进阶之&lt;code&gt;rebase&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Git" scheme="https://www.blacklisten.cn/categories/Git/"/>
+    
+    
+    <category term="Git操作指南" scheme="https://www.blacklisten.cn/tags/Git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JSON.stringify()</title>
+    <link href="https://www.blacklisten.cn/Front/json-stringify/"/>
+    <id>https://www.blacklisten.cn/Front/json-stringify/</id>
+    <published>2020-07-21T13:53:31.000Z</published>
+    <updated>2020-07-21T13:53:31.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;code&gt;JSON.stringify()&lt;/code&gt; 方法将一个 &lt;strong&gt;JavaScript&lt;/strong&gt; 对象或值转换为 &lt;strong&gt;JSON&lt;/strong&gt; 字符串，如果指定了一个 &lt;code&gt;replacer&lt;/code&gt; 函数，则可以选择性地替换值，或者指定的 &lt;code&gt;replacer&lt;/code&gt; 是数组，则可选择性地仅包含数组指定的属性。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Front" scheme="https://www.blacklisten.cn/categories/Front/"/>
+    
+    
+    <category term="JavaScript" scheme="https://www.blacklisten.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Window Terminal美化💖</title>
+    <link href="https://www.blacklisten.cn/Configuration/window-terminal%E7%BE%8E%E5%8C%96%F0%9F%92%96/"/>
+    <id>https://www.blacklisten.cn/Configuration/window-terminal%E7%BE%8E%E5%8C%96%F0%9F%92%96/</id>
+    <published>2020-07-13T00:00:00.000Z</published>
+    <updated>2020-07-13T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;Window Terminal&lt;/strong&gt;终端程序是一款新式、快速、高效、强大且高效的终端应用程序，适用于命令行工具和命令提示符，&lt;em&gt;PowerShell&lt;/em&gt;和&lt;em&gt;WSL&lt;/em&gt;等&lt;em&gt;Shell&lt;/em&gt;用户。&lt;br&gt;主要功能包括多个选项卡、窗格、Unicode、和UTF-8字符支持，GPU加速文本渲染引擎以及&lt;strong&gt;自定义主题、样式和配置&lt;/strong&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="terminal" scheme="https://www.blacklisten.cn/tags/terminal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Electron学习笔记</title>
+    <link href="https://www.blacklisten.cn/Learning/electron%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://www.blacklisten.cn/Learning/electron%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-07-09T17:10:31.000Z</published>
+    <updated>2020-07-09T17:10:31.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;记录自己学习&lt;code&gt;Electron&lt;/code&gt;所整理出来的一些学习笔记。仅为个人笔记，所以写的不好，不够清晰，只会留下当时的部分思路，作为后来有问题时的速查笔记。大部分摘自官方文档，文档太长，只挑了当时的重点记录。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Learning" scheme="https://www.blacklisten.cn/categories/Learning/"/>
+    
+    
+    <category term="Electron" scheme="https://www.blacklisten.cn/tags/Electron/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chocolatey Window设计的包管理器</title>
+    <link href="https://www.blacklisten.cn/Configuration/chocolatey-window%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    <id>https://www.blacklisten.cn/Configuration/chocolatey-window%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/</id>
+    <published>2020-05-11T14:15:06.000Z</published>
+    <updated>2020-05-11T14:15:06.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;code&gt;Chocolatey&lt;/code&gt; Windows设计的包管理器，有了它，你也可以&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;figcaption&gt;&lt;span&gt;Git Bash/Shell&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;choco install docker&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://chocolatey.org/why-chocolatey&quot;&gt;Why Chocolatey&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="Chocolatey" scheme="https://www.blacklisten.cn/tags/Chocolatey/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何自定义切换Node源✨</title>
+    <link href="https://www.blacklisten.cn/Configuration/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%87%E6%8D%A2node%E6%BA%90%E2%9C%A8/"/>
+    <id>https://www.blacklisten.cn/Configuration/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%87%E6%8D%A2node%E6%BA%90%E2%9C%A8/</id>
+    <published>2020-03-25T00:00:00.000Z</published>
+    <updated>2020-03-25T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在我们使用&lt;code&gt;nodejs&lt;/code&gt;进行安包时，常常使用淘宝镜像 &lt;em&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://registry.npm.taobao.org/&quot;&gt;https://registry.npm.taobao.org/&lt;/a&gt;&lt;/em&gt; ，也是是&lt;code&gt;cnpm&lt;/code&gt;源。&lt;br&gt;&lt;code&gt;nodejs&lt;/code&gt;默认使用&lt;code&gt;npm&lt;/code&gt;源，&lt;code&gt;npm&lt;/code&gt;源在下载一些国外资源是速度比较慢，这个时候我们会考虑使用&lt;code&gt;npm config&lt;/code&gt;全局配置&lt;code&gt;cnpm&lt;/code&gt;源。&lt;br&gt;但由于我们有时候会有一些&lt;code&gt;package&lt;/code&gt;放在自己的&lt;code&gt;npm&lt;/code&gt;私服上面，我们可能需要在&lt;code&gt;npm cnpm 自己的npm&lt;/code&gt;源上面来回切换，这个时候我们使用&lt;code&gt;npm config&lt;/code&gt;进行全局配置就略显麻烦了。所以我们使用&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/Pana/nrm&quot;&gt;nrm&lt;/a&gt;进行&lt;code&gt;npm&lt;/code&gt;源的管理。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="NodeJs" scheme="https://www.blacklisten.cn/tags/NodeJs/"/>
+    
+    <category term="nrm" scheme="https://www.blacklisten.cn/tags/nrm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安装多个版本的node✨</title>
+    <link href="https://www.blacklisten.cn/Configuration/%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84node%E2%9C%A8/"/>
+    <id>https://www.blacklisten.cn/Configuration/%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84node%E2%9C%A8/</id>
+    <published>2020-03-25T00:00:00.000Z</published>
+    <updated>2020-03-25T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;code&gt;nodejs&lt;/code&gt;是前端经常使用到的，&lt;code&gt;nodejs&lt;/code&gt;拥有很多版本，我们一般使用官方提供的稳定版本就好了，当然，如果你想体验一些&lt;strong&gt;新功能&lt;/strong&gt; &lt;strong&gt;新特性&lt;/strong&gt; 可以使用最新版本的&lt;code&gt;nodejs&lt;/code&gt;。&lt;br&gt;在我们团队的协作中，因为有&lt;code&gt;package.json&lt;/code&gt;的存在，所以我们尽量保证团队是用的&lt;code&gt;nodejs&lt;/code&gt;版本一致。&lt;br&gt;这个时候我们就需要版本控制工具&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;nvm&lt;/a&gt;了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="NodeJs" scheme="https://www.blacklisten.cn/tags/NodeJs/"/>
+    
+    <category term="nvm" scheme="https://www.blacklisten.cn/tags/nvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Electron问题集合</title>
+    <link href="https://www.blacklisten.cn/FAQ/electron%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/"/>
+    <id>https://www.blacklisten.cn/FAQ/electron%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</id>
+    <published>2020-02-12T15:10:31.000Z</published>
+    <updated>2020-02-12T15:10:31.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Electron6.0.0版本部分window7设备上黑屏问题解决方案，官方问题&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://github.com/electron/electron/issues/19569&quot;&gt;issues&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="FAQ" scheme="https://www.blacklisten.cn/categories/FAQ/"/>
+    
+    
+    <category term="Electron" scheme="https://www.blacklisten.cn/tags/Electron/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>整理自己常用的vscode插件集合</title>
+    <link href="https://www.blacklisten.cn/Configuration/%E6%95%B4%E7%90%86%E8%87%AA%E5%B7%B1%E5%B8%B8%E7%94%A8%E7%9A%84vscode%E6%8F%92%E4%BB%B6%E9%9B%86%E5%90%88/"/>
+    <id>https://www.blacklisten.cn/Configuration/%E6%95%B4%E7%90%86%E8%87%AA%E5%B7%B1%E5%B8%B8%E7%94%A8%E7%9A%84vscode%E6%8F%92%E4%BB%B6%E9%9B%86%E5%90%88/</id>
+    <published>2018-10-16T00:00:00.000Z</published>
+    <updated>2018-10-16T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;整理了自己所用的vscode插件&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Configuration" scheme="https://www.blacklisten.cn/categories/Configuration/"/>
+    
+    
+    <category term="vscode" scheme="https://www.blacklisten.cn/tags/vscode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flex布局</title>
+    <link href="https://www.blacklisten.cn/Css/flex%E5%B8%83%E5%B1%80/"/>
+    <id>https://www.blacklisten.cn/Css/flex%E5%B8%83%E5%B1%80/</id>
+    <published>2018-09-11T00:00:00.000Z</published>
+    <updated>2018-09-11T00:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;网页布局（layout）是 CSS 的一个重点应用。&lt;/p&gt;
+&lt;!-- ![网页布局(layout).png](https://s2.ax1x.com/2019/01/23/kA7aHx.png) --&gt;
+&lt;p&gt;布局的传统解决方案，基于盒状模型，依赖 display属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容易实现。&lt;br&gt;本文主要介绍了使用&lt;code&gt;display: flex&lt;/code&gt;可以进行的一些布局。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Css" scheme="https://www.blacklisten.cn/categories/Css/"/>
+    
+    
+    <category term="layout" scheme="https://www.blacklisten.cn/tags/layout/"/>
+    
+  </entry>
+  
+</feed>

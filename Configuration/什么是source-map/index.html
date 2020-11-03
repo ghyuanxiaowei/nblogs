@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>什么是Source Map - Blacklisten&#039;blogs</title><meta description="在日常开发过程中，我们编写的源代码通过多重处理（编译，封装，压缩…），最后形成的产物代码，在浏览器中调试时，我们会发现代码变得面目全非，根本没办法调试。因此，我们需要一种将产物代码回溯到源代码的功能，Source Map就是实现这一功能的工具。Source Map的基本原理是，在编译过程中，在生成产物代码的同时也生成基于源代码的一份映射关系表。有了这张映射关系表，我们就可以通过 chrome 控制"><meta property="og:type" content="blog"><meta property="og:title" content="什么是Source Map"><meta property="og:url" content="https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"><meta property="og:site_name" content="Blacklisten&#039;blogs"><meta property="og:description" content="在日常开发过程中，我们编写的源代码通过多重处理（编译，封装，压缩…），最后形成的产物代码，在浏览器中调试时，我们会发现代码变得面目全非，根本没办法调试。因此，我们需要一种将产物代码回溯到源代码的功能，Source Map就是实现这一功能的工具。Source Map的基本原理是，在编译过程中，在生成产物代码的同时也生成基于源代码的一份映射关系表。有了这张映射关系表，我们就可以通过 chrome 控制"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.blacklisten.cn/gallery/covers/wallhaven-963wjw.jpg"><meta property="article:published_time" content="2020-10-22T16:15:06.000Z"><meta property="article:author" content="blacklisten"><meta property="article:tag" content="Webpack"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/gallery/covers/wallhaven-963wjw.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"},"headline":"Blacklisten'blogs","image":["https://www.blacklisten.cn/gallery/covers/wallhaven-963wjw.jpg"],"datePublished":"2020-10-22T16:15:06.000Z","author":{"@type":"Person","name":"blacklisten"},"description":"在日常开发过程中，我们编写的源代码通过多重处理（编译，封装，压缩…），最后形成的产物代码，在浏览器中调试时，我们会发现代码变得面目全非，根本没办法调试。因此，我们需要一种将产物代码回溯到源代码的功能，Source Map就是实现这一功能的工具。Source Map的基本原理是，在编译过程中，在生成产物代码的同时也生成基于源代码的一份映射关系表。有了这张映射关系表，我们就可以通过 chrome 控制"}</script><link rel="canonical" href="https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/github.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?68ab0f2c8b23735e70a585f85d89b4d3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-117852294-3" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-117852294-3');</script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Blacklisten'blogs" type="application/atom+xml">
+</head><body class="is-3-column"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script type="text/javascript" src="/js/snow.js"></script><div class="snow-container"></div><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Blacklisten</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="My Github" href="https://github.com/blacklisten"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/gallery/covers/wallhaven-963wjw.jpg" alt="什么是Source Map"></span></div><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-10-22T16:15:06.000Z" title="2020-10-22T16:15:06.000Z">2020-10-22</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/Configuration/">Configuration</a></span><span class="level-item">18 分钟读完 (大约2663个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">什么是Source Map</h1><div class="content"><p>在日常开发过程中，我们编写的源代码通过多重处理（编译，封装，压缩…），最后形成的产物代码，在浏览器中调试时，我们会发现代码变得面目全非，根本没办法调试。<br>因此，我们需要一种将产物代码回溯到源代码的功能，<strong>Source Map</strong>就是实现这一功能的工具。<br><strong>Source Map</strong>的基本原理是，在编译过程中，在生成产物代码的同时也生成基于源代码的一份映射关系表。有了这张映射关系表，我们就可以通过 chrome 控制台中的“Enable JavaScript source map”来实现调试时的显示与定位源代码的功能。<br>生成<strong>Source Map</strong>的方式有很多种，他们的<strong>构建速度、质量</strong>（反解代码与源代码的接近程度以及调试时行号等辅助信息的对应情况）、<strong>访问方式</strong>（在产物文件中或单独生成 source map）、文件大小都各不相同。在开发和生成环境下我们对 source map 的期望也有所不同。</p>
+<ul>
+<li>在开发环境中，我们更关心构建速度、质量，以便于提升开发效率，而不关心文件大小与访问方式</li>
+<li>在生产环境中，我们更关注的是，是否需要开启 source map，生成文件的大小和访问方式是否对页面性能造成影响，其次才是质量和构建速度。</li>
+</ul>
+<a id="more"></a>
+
+<p>本文示例代码<a target="_blank" rel="noopener" href="https://github.com/blacklisten/learning/tree/master/webpack/sourcemap">webpack source map example</a></p>
+<h2 id="webpack-中-source-map-的预设"><a href="#webpack-中-source-map-的预设" class="headerlink" title="webpack 中 source map 的预设"></a>webpack 中 source map 的预设</h2><p>在<strong>webpack</strong>中，通过设置 devtool 来选择 source map 的预设类型，它提供了<a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/devtool/#devtool">20 多种</a>source map 的预设。</p>
+<p>这些预设通常包含了<strong>eval、cheap、module、inline、hidden、nosource、source-map</strong>等关键字组合。</p>
+<figure class="highlight typescript"><figcaption><span>示例代码</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TODO webpack/lib/WebpackOptionsApply.js:232</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (options.devtool.includes(<span class="string">"source-map"</span>)) {</span><br><span class="line">  <span class="keyword">const</span> hidden = options.devtool.includes(<span class="string">"hidden"</span>);</span><br><span class="line">  <span class="keyword">const</span> inline = options.devtool.includes(<span class="string">"inline"</span>);</span><br><span class="line">  <span class="keyword">const</span> evalWrapped = options.devtool.includes(<span class="string">"eval"</span>);</span><br><span class="line">  <span class="keyword">const</span> cheap = options.devtool.includes(<span class="string">"cheap"</span>);</span><br><span class="line">  <span class="keyword">const</span> moduleMaps = options.devtool.includes(<span class="string">"module"</span>);</span><br><span class="line">  <span class="keyword">const</span> noSources = options.devtool.includes(<span class="string">"nosources"</span>);</span><br><span class="line">  <span class="keyword">const</span> Plugin = evalWrapped</span><br><span class="line">    ? <span class="built_in">require</span>(<span class="string">"./EvalSourceMapDevToolPlugin"</span>)</span><br><span class="line">    : <span class="built_in">require</span>(<span class="string">"./SourceMapDevToolPlugin"</span>);</span><br><span class="line">  <span class="keyword">new</span> Plugin({</span><br><span class="line">    filename: inline ? <span class="literal">null</span> : options.output.sourceMapFilename,</span><br><span class="line">    moduleFilenameTemplate: options.output.devtoolModuleFilenameTemplate,</span><br><span class="line">    fallbackModuleFilenameTemplate:</span><br><span class="line">      options.output.devtoolFallbackModuleFilenameTemplate,</span><br><span class="line">    append: hidden ? <span class="literal">false</span> : <span class="literal">undefined</span>,</span><br><span class="line">    <span class="keyword">module</span>: moduleMaps ? true : cheap ? false : true,</span><br><span class="line">    columns: cheap ? false : true,</span><br><span class="line">    noSources: noSources,</span><br><span class="line">    namespace: options.output.devtoolNamespace,</span><br><span class="line">  }).apply(compiler);</span><br><span class="line">} else if (options.devtool.includes("eval")) {</span><br><span class="line">  <span class="keyword">const</span> EvalDevToolModulePlugin = <span class="built_in">require</span>(<span class="string">"./EvalDevToolModulePlugin"</span>);</span><br><span class="line">  <span class="keyword">new</span> EvalDevToolModulePlugin({</span><br><span class="line">    moduleFilenameTemplate: options.output.devtoolModuleFilenameTemplate,</span><br><span class="line">    <span class="keyword">namespace</span>: options.output.devtoolNamespace,</span><br><span class="line">  }).apply(compiler);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><em>devtool 的值匹配并非精确匹配，某个关键字只要包含在赋值中即可获得匹配，例如：’foo-eval-bar’ 等同于 ‘eval’，’cheapfoo-source-map’ 等同于 ‘cheap-source-map’。</em></p>
+<h2 id="Source-Map-名称关键字"><a href="#Source-Map-名称关键字" class="headerlink" title="Source Map 名称关键字"></a>Source Map 名称关键字</h2><ul>
+<li>false：即不开启 source map 功能，其他不符合上述规则的赋值也等价于 false。</li>
+<li>eval：是指在编译器中使用 EvalDevToolModulePlugin 作为 source map 的处理插件。<br>[xxx-…]source-map：根据 devtool 对应值中是否有 <strong>eval</strong> 关键字来决定使用 EvalSourceMapDevToolPlugin 或 SourceMapDevToolPlugin 作为 source map 的处理插件，其余关键字则决定传入到插件的相关字段赋值。</li>
+<li>inline：决定是否传入插件的 filename 参数，作用是决定单独生成 source map 文件还是在行内显示，<strong>该参数在 eval- 参数存在时无效</strong>。</li>
+<li>hidden：决定传入插件 append 的赋值，作用是判断是否添加 SourceMappingURL 的注释，<strong>该参数在 eval- 参数存在时无效</strong>。</li>
+<li>module：为 true 时传入插件的 module 为 true ，作用是为加载器（Loaders）生成 source map。</li>
+<li>cheap：这个关键字有两处作用。首先，当 module 为 false 时，它决定插件 module 参数的最终取值，最终取值与 cheap 相反。其次，它决定插件 columns 参数的取值，作用是决定生成的 source map 中是否包含列信息，在不包含列信息的情况下，调试时只能定位到指定代码所在的行而定位不到所在的列。</li>
+<li>nosource：nosource 决定了插件中 noSource 变量的取值，作用是决定生成的 source map 中是否包含源代码信息，不包含源码情况下只能显示调用堆栈信息。</li>
+</ul>
+<h2 id="Source-Map-处理插件"><a href="#Source-Map-处理插件" class="headerlink" title="Source Map 处理插件"></a>Source Map 处理插件</h2><p>从上面的规则中我们还可以看到，根据不同规则，实际上 Webpack 是从三种插件中选择其一作为 source map 的处理插件。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/master/lib/EvalDevToolModulePlugin.js">EvalDevToolModulePlugin</a>：模块代码后添加 sourceURL=webpack:///+ 模块引用路径，不生成 source map 内容，模块产物代码通过 eval() 封装。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/master/lib/EvalSourceMapDevToolPlugin.js">EvalSourceMapDevToolPlugin</a>：生成 base64 格式的 source map 并附加在模块代码之后， source map 后添加 sourceURL=webpack:///+ 模块引用路径，不单独生成文件，模块产物代码通过 eval() 封装。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/master/lib/SourceMapDevToolPlugin.js">SourceMapDevToolPlugin</a>：生成单独的 .map 文件，模块产物代码不通过 eval 封装。</li>
+</ul>
+<p>通过上面的代码分析，我们了解了不同参数在 Webpack 运行时起到的作用。那么这些不同参数组合下的各种预设对我们的 source map 生成又各自会产生什么样的效果呢？</p>
+<h2 id="不同预设的结果对比"><a href="#不同预设的结果对比" class="headerlink" title="不同预设的结果对比"></a>不同预设的结果对比</h2><table>
+<thead>
+<tr>
+<th>devtool 类型</th>
+<th>大小（KB）注 1</th>
+<th>时间（ms）注 2</th>
+<th>质量（代码可读性）</th>
+<th>附加内容</th>
+<th>调试效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>1553</td>
+<td>3803/41（最快/最快）</td>
+<td>打包后产物代码（地）</td>
+<td>-</td>
+<td>无</td>
+</tr>
+<tr>
+<td>eval</td>
+<td>1597</td>
+<td>3798/42（最快/最快）</td>
+<td>生成后产物代码（低）</td>
+<td>每个模块代码后添加 sourceURL=webpack:///./…</td>
+<td>能定位到具体源文件名，但是现实内容为生成后代码，相比于 none 只是多了 eval()以及 sourceURL 指向</td>
+</tr>
+<tr>
+<td>eval-source-map</td>
+<td>5496</td>
+<td>5915/89（最慢 ⬇/快）</td>
+<td>源代码（最高 ⬆）</td>
+<td>每个模块代码后添加 sourceURL=[module]\n//#sourceMappingURL=…Base64 data</td>
+<td>能定位到源文件名，且显示内容为源代码。点击调试点能定位到具体行与列</td>
+</tr>
+<tr>
+<td>eval-cheap-source-map</td>
+<td>3753</td>
+<td>3862/64（快/更快）</td>
+<td>loader 处理后代码（中）</td>
+<td>同上</td>
+<td>能定位到源文件名，显示内容为经过 babel-loader 转换后的代码，点击调试能定位到行但缺少列信息，只能跳转到行首</td>
+</tr>
+<tr>
+<td>eval-cheap-module-source-map</td>
+<td>4023</td>
+<td>4197/81（慢/更快）</td>
+<td>缺少列信息的源代码（高）</td>
+<td>同上</td>
+<td>能定位到原文件名，切显示内容为源代码，点击调试能定位到行但缺少列信息，只能跳转到行首</td>
+</tr>
+<tr>
+<td>source-map</td>
+<td>1554/2836</td>
+<td>5833/1721（最慢/最慢）⬇</td>
+<td>源代码（最高 ⬆）</td>
+<td>单独生成.map 后缀的 sourcemap 文件，在产物代码末尾生成一个 sourceMappingURL=xxx.map</td>
+<td>与 eval-source-map 效果相同</td>
+</tr>
+<tr>
+<td>cheap-source-map</td>
+<td>1554/1595</td>
+<td>4099/122（快/慢）</td>
+<td>loader 转换后代码（中）</td>
+<td>同上</td>
+<td>与 eval-cheap-source-map 效果相同</td>
+</tr>
+<tr>
+<td>cheap-module-source-map</td>
+<td>1554/1794</td>
+<td>4052/176（慢/更慢）</td>
+<td>缺少列信息的源代码（高）</td>
+<td>同上</td>
+<td>与 eval-cheap-module-source-map 相同</td>
+</tr>
+<tr>
+<td>inline-source-map</td>
+<td>5336</td>
+<td>5247/1543（最慢/最慢）⬇</td>
+<td>源代码（最高 ⬆）</td>
+<td>在产物代码末尾生成一个 sourceMappingURL=…Base64 data</td>
+<td>与 eval-source-map 相同，<strong>通常应用在第三方代码中</strong></td>
+</tr>
+<tr>
+<td>inline-cheap-source-map</td>
+<td>3682</td>
+<td>3785/131（快/慢）</td>
+<td>loader 转换后代码（中）</td>
+<td>同上</td>
+<td>与 eval-cheap-source-map 效果相同</td>
+</tr>
+<tr>
+<td>inline-cheap-module-source-map</td>
+<td>3947</td>
+<td>4146/185（慢/更慢）</td>
+<td>缺少列信息的源代码（高）</td>
+<td>同上</td>
+<td>与 eval-cheap-module-source-map 相同</td>
+</tr>
+<tr>
+<td>hidden-source-map</td>
+<td>1554/2836</td>
+<td>5871/1569（最慢/最慢）⬇</td>
+<td>源代码（最高 ⬆）</td>
+<td>单独生成.map 后缀的 sourcemap 文件，产物代码末尾不添加 sourceMappingURL，即起到隐藏的作用，<strong>通常用于错误报告工具中定位使用</strong></td>
+<td>外部访问不带 sourceMappingURL 的产物文件，而生成的 sourcemap 文件仅用于错误报告工具等特殊情况下生成和使用，<strong>通常不上传到 web 服务器中</strong></td>
+</tr>
+<tr>
+<td>nosources-source-map</td>
+<td>1554/1173</td>
+<td>5270/1568（最慢/最慢）⬇</td>
+<td>无法显示代码（最低 ⬇）</td>
+<td>与 source-map 相同</td>
+<td>用于在报错信息上传于调试时显示堆栈信息，而无法查看源码</td>
+</tr>
+</tbody></table>
+<p>*注 1：“/”前后分别表示产物 js 大小和对应 .map 大小。<br>*注 2：“/”前后分别表示初次构建时间和开启 watch 模式下 rebuild 时间。对应统计的都是 development 模式下的笔者机器环境下几次构建时间的平均值，只作为相对快慢与量级的比较。</p>
+<p>选择不同的devtool会产生不同的效果</p>
+<ul>
+<li>质量：souce-map = eval-source-map &gt; cheap-module- &gt; cheap- &gt; eval = none &gt; nosource-</li>
+<li>构建速度：再次构建速度都大于第一次构建速度<ul>
+<li>在开发环境下：一直开着 devServer，再次构建的速度对我们的效率影响远大于初次构建的速度。从结果中可以看到，eval- 对应的 EvalSourceMapDevToolPlugin 整体要快于不带 eval- 的 SourceMapDevToolPlugin。尤其在质量最佳的配置下，eval-source-map 的再次构建速度要远快于其他几种。而同样插件配置下，不同质量配置与构建速度成反比，但差异程度有限，更多是看具体项目的大小而定。</li>
+<li>在生产环境下：通常不会开启再次构建，因此相比再次构建，初次构建的速度更值得关注，甚至对构建速度以外因素的考虑要优先于对构建速度的考虑。</li>
+</ul>
+</li>
+<li>包的大小和生成方式：在开发环境下我们并不需要关注这些因素，<strong>正如开发环境下也通常不考虑使用分包等优化方式</strong>。我们需要关注速度和质量来保证我们的开发体验。</li>
+</ul>
+<h2 id="开发环境下Source-Map推荐预设"><a href="#开发环境下Source-Map推荐预设" class="headerlink" title="开发环境下Source Map推荐预设"></a>开发环境下Source Map推荐预设</h2><ul>
+<li>如果在调试时，需要通过source map来快速定位源代码，优先考虑使用<strong>eval-cheap-module-source-map</strong></li>
+<li>或者使用<strong>eval-source-map</strong> <strong>eval-cheap-source-map</strong></li>
+<li>或者通过<strong>EvalSourceMapDevToolPlugin EvalDevToolModulePlugin</strong>插件</li>
+</ul>
+<h2 id="reference👍"><a href="#reference👍" class="headerlink" title="reference👍"></a>reference👍</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">浏览器工具是如何将 source map 内容映射回源文件</a></p>
+<blockquote>
+<p>在控制台的网络面板中通常看不到 source map 文件的请求，其原因是出于安全考虑 Chrome 隐藏了 source map 的请求，需要通过 <a href="chrome://net-export/">net-log</a> 来查询。</p>
+</blockquote>
+<article class="message message-immersive is-warning">
+<div class="message-body">
+<i class="fas fa-question-circle mr-2"></i>Something wrong with this article? 
+Click <a target="_blank" rel="noopener" href="https://github.com/blacklisten/nblogs/edit/site/source/_posts/2020/Webpack-SourceMap">here</a> 
+to submit your revision.
+</div>
+</article>
+
+<p><a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-size:12px;line-height:1.2;display:inline-block;border-radius:3px" href="https://wallhaven.cc" target="_blank" rel="noopener noreferrer" title="Vector Landscape Vectors by Vecteezy"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white" viewBox="0 0 32 32"><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Vector Landscape Vectors by Vecteezy</span></a></p>
+<script>
+        document.querySelectorAll('.not-gallery-item')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="article-licensing box"><div class="licensing-title"><p>什么是Source Map</p><p><a href="https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/">https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>blacklisten</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-10-22</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p></div></div></div></div></div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Webpack/">Webpack</a></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.jpg" alt="支付宝"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Front/math-basic-api/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Math basic api</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Front/abortcontroller%F0%9F%91%80/"><span class="level-item">AbortController👀</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqus.js"></script><script>new DisqusJS({
+            shortname: 'blacklisten',
+            apikey: "exTu1A9AwH0nVWvvCmSVh7H8HoTp4RUkld2NgMecCw2aYahA3g7iDtzNCxP7Quug",
+            siteName: "Blacklisten'blogs",
+            identifier: 'Configuration/什么是source-map/',
+            url: 'https://www.blacklisten.cn/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/',
+            title: "什么是Source Map",
+            api: 'https://disqus.skk.moe/disqus/',
+            admin: "blacklisten",
+            adminLabel: "Admin",
+            nesting: 4
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><a class="media-left" href="/Front/react%E5%9F%BA%E7%A1%80/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-5w1eq3.jpg" alt="React基础"></p></a><div class="media-content size-small"><p><time dateTime="2020-11-03T15:15:06.000Z">2020-11-03</time></p><p class="title is-6"><a class="link-muted" href="/Front/react%E5%9F%BA%E7%A1%80/">React基础</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Front/math-basic-api/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-2em38y.jpg" alt="Math basic api"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-27T16:15:06.000Z">2020-10-27</time></p><p class="title is-6"><a class="link-muted" href="/Front/math-basic-api/">Math basic api</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-963wjw.jpg" alt="什么是Source Map"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-22T16:15:06.000Z">2020-10-22</time></p><p class="title is-6"><a class="link-muted" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AFsource-map/">什么是Source Map</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Configuration/">Configuration</a></p></div></article><article class="media"><a class="media-left" href="/Front/abortcontroller%F0%9F%91%80/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-xlq1rv.jpg" alt="AbortController👀"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-22T15:15:06.000Z">2020-10-22</time></p><p class="title is-6"><a class="link-muted" href="/Front/abortcontroller%F0%9F%91%80/">AbortController👀</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Front/">Front</a></p></div></article><article class="media"><a class="media-left" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/"><p class="image is-64x64"><img class="fill" src="/gallery/covers/wallhaven-xlx96v.png" alt="什么是热更新？"></p></a><div class="media-content size-small"><p><time dateTime="2020-10-20T16:15:06.000Z">2020-10-20</time></p><p class="title is-6"><a class="link-muted" href="/Configuration/%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F/">什么是热更新？</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Configuration/">Configuration</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Configuration/"><span class="level-start"><span class="level-item">Configuration</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Css/"><span class="level-start"><span class="level-item">Css</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/FAQ/"><span class="level-start"><span class="level-item">FAQ</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Front/"><span class="level-start"><span class="level-item">Front</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Git/"><span class="level-start"><span class="level-item">Git</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Hexo/"><span class="level-start"><span class="level-item">Hexo</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Learning/"><span class="level-start"><span class="level-item">Learning</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Browser/"><span class="tag">Browser</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Chocolatey/"><span class="tag">Chocolatey</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Electron/"><span class="tag">Electron</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span class="tag">Git操作指南</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo-Theme/"><span class="tag">Hexo-Theme</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Icarus%E6%8C%87%E5%8D%97/"><span class="tag">Icarus指南</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Math/"><span class="tag">Math</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Network-Request/"><span class="tag">Network Request</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NodeJs/"><span class="tag">NodeJs</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Webpack/"><span class="tag">Webpack</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/commitizen/"><span class="tag">commitizen</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/layout/"><span class="tag">layout</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nrm/"><span class="tag">nrm</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nvm/"><span class="tag">nvm</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/terminal/"><span class="tag">terminal</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vscode/"><span class="tag">vscode</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#webpack-中-source-map-的预设"><span class="mr-2">1</span><span>webpack 中 source map 的预设</span></a></li><li><a class="is-flex" href="#Source-Map-名称关键字"><span class="mr-2">2</span><span>Source Map 名称关键字</span></a></li><li><a class="is-flex" href="#Source-Map-处理插件"><span class="mr-2">3</span><span>Source Map 处理插件</span></a></li><li><a class="is-flex" href="#不同预设的结果对比"><span class="mr-2">4</span><span>不同预设的结果对比</span></a></li><li><a class="is-flex" href="#开发环境下Source-Map推荐预设"><span class="mr-2">5</span><span>开发环境下Source Map推荐预设</span></a></li><li><a class="is-flex" href="#reference👍"><span class="mr-2">6</span><span>reference👍</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Blacklisten</a><p class="size-small"><span>&copy; 2020 blacklisten</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/blacklisten"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><!-- hexo injector body_end start -->
+    <script>
+    (() => {
+        function switchTab() {
+            if (!location.hash) {
+              return;
+            }
+            Array
+                .from(document.querySelectorAll('.tab-content'))
+                .forEach($tab => {
+                    $tab.classList.add('is-hidden');
+                });
+            Array
+                .from(document.querySelectorAll('.tabs li'))
+                .forEach($tab => {
+                    $tab.classList.remove('is-active');
+                });
+            const $activeTab = document.querySelector(location.hash);
+            if ($activeTab) {
+                $activeTab.classList.remove('is-hidden');
+            }
+            const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+            if ($tabMenu) {
+                $tabMenu.parentElement.classList.add('is-active');
+            }
+        }
+        switchTab();
+        window.addEventListener('hashchange', switchTab, false);
+    })();
+    </script>
+    <!-- hexo injector body_end end --></body></html>
